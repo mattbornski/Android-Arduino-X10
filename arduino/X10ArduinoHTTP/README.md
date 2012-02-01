@@ -25,3 +25,5 @@ mkdir -p $SKETCHBOOK/libraries
 cp -R libraries/* $SKETCHBOOK/libraries
 
 Open the Arduino sketch (.ino file) in your Arduino tools.  You may have to quit and reload the devtools if they were open so that the new library is located.  Upload the sketch to your properly wired board.
+
+Connect your Arduino to a power source and your network.  Navigate to "x10.local" from a Bonjour/Zeroconf enabled machine *on the same subnet*.  Note that many wireless routers do not bridge wireless/wired networks for multicast purposes (required for Zeroconf) and if you are experiencing difficulties, try plugging both the Arduino and your development machine into the same wired ethernet router.
