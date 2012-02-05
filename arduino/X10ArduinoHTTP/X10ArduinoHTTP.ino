@@ -7,7 +7,7 @@
 #include <SPI.h>
 #include <util.h>
 
-#include <EthernetBonjour.h>
+//#include <EthernetBonjour.h>
 
 #include <X10Firecracker.h>
 
@@ -21,10 +21,10 @@ EthernetServer server = EthernetServer(80);
 void setup()
 {
   Ethernet.begin(mac);
-  EthernetBonjour.begin("x10");
+  /*EthernetBonjour.begin("x10");
   EthernetBonjour.addServiceRecord("Arduino Bonjour Webserver Example._http",
                                    80,
-                                   MDNSServiceTCP);
+                                   MDNSServiceTCP);*/
   X10.init( RTS_PIN, DTR_PIN );
 }
 
@@ -41,7 +41,7 @@ void off()
 void loop()
 {
   // Handle Bonjour maintenance
-  EthernetBonjour.run();
+  //EthernetBonjour.run();
   
   // listen for incoming clients
   EthernetClient client = server.available();
@@ -61,22 +61,29 @@ void loop()
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: application/json");
           client.println();
-
-          // Send data
-          /*for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
-            client.print("analog input ");
-            client.print(analogChannel);
-            client.print(" is ");
-            client.print(analogRead(analogChannel));
-            client.println("<br />");
-          }*/
-          client.println(buffer);
-          client.println("{");
-          client.print("  \"ip\": \"");
-          client.print(Ethernet.localIP());
-          client.println("\"");
-          client.println("}");
-          break;
+          if (buffer.startsWith("POST /N/2/on")) {
+            on();
+            break;
+          } else if (buffer.startsWith("POST /N/2/off")) {
+            off();
+            break;
+          } else {
+            // Send data
+            /*for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
+              client.print("analog input ");
+              client.print(analogChannel);
+              client.print(" is ");
+              client.print(analogRead(analogChannel));
+              client.println("<br />");
+            }*/
+            client.println(buffer);
+            client.println("{");
+            client.print("  \"ip\": \"");
+            client.print(Ethernet.localIP());
+            client.println("\"");
+            client.println("}");
+            break;
+          }
         }
         if (c == '\n') {
           // you're starting a new line
