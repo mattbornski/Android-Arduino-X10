@@ -85,11 +85,9 @@ public class X10WidgetProvider extends AppWidgetProvider {
 		for (int i = 0; i < N; i++) {
 			int appWidgetId = appWidgetIds[i];
 
-			// Create an Intent to launch ExampleActivity
-			Intent intent = new Intent(context, X10WidgetActivity.class);
-			PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,	intent, 0);
-			/*Intent intent = new Intent(context, X10WidgetService.class);
-			PendingIntent pendingIntent = PendingIntent.getService(context, 0,	intent, 0);*/
+			// Create an Intent to launch the service
+			Intent intent = new Intent(context, X10IntentService.class);
+			PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
 			// Get the layout for the App Widget and attach an on-click listener
 			// to the button

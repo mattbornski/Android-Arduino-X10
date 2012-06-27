@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky
+END
+ForecastProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/ForecastProvider.java
+END
+DetailsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/DetailsActivity.java
+END
+UpdateService.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/UpdateService.java
+END
+ForecastUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/ForecastUtils.java
+END
+InfoActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/InfoActivity.java
+END
+TinyAppWidget.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/TinyAppWidget.java
+END
+MedAppWidget.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/MedAppWidget.java
+END
+WebserviceHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/WebserviceHelper.java
+END
+ConfigureActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/trunk/Sky/Sky/src/org/jsharkey/sky/ConfigureActivity.java
+END

@@ -20,7 +20,7 @@ byte mac[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
 // is on the wired.  I furthermore don't have a local network DNS server, and
 // can't get my router to assign a static IP to the same mac address.  This is
 // a hack.
-byte ip[] = { 192, 168, 10, 77 };
+byte ip[] = { 192, 168, 1, 77 };
 
 EthernetServer server = EthernetServer(80);
 
