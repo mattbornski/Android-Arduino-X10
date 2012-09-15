@@ -1,37 +1,41 @@
-#include <Dhcp.h>
-#include <Dns.h>
 #include <Ethernet.h>
-#include <EthernetClient.h>
-#include <EthernetServer.h>
-#include <EthernetUdp.h>
 #include <SPI.h>
-#include <util.h>
-
-//#include <EthernetBonjour.h>
 
 #include <X10Firecracker.h>
 
 #define RTS_PIN     7                   // RTS line for C17A - DB9 pin 7
 #define DTR_PIN     4                   // DTR line for C17A - DB9 pin 4
 
-byte mac[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
-// I can't configure my router to bridge Bonjour from wireless to wired subnets
-// and most of the devices on my network are on the wireless, but the arduino
-// is on the wired.  I furthermore don't have a local network DNS server, and
-// can't get my router to assign a static IP to the same mac address.  This is
-// a hack.
-byte ip[] = { 192, 168, 10, 77 };
+byte myMac[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
+IPAddress myIp(192,168,1,77);
+//IPAddress myDns(192,168,1,1);
 
 EthernetServer server = EthernetServer(80);
 
 void setup()
 {
-  Ethernet.begin(mac, ip);
+  Serial.begin(9600);
+  Serial.println("Begin setup");
+  
+  // Attempt to get a router assigned IP.
+  Serial.print("Attempting to get an IP address using DHCP: ");
+  if (!Ethernet.begin(myMac)) {
+    // if that fails, start with a hard-coded address:
+    Serial.println("failed, falling back to hardcoded IP.");
+    Ethernet.begin(myMac, myIp);
+  } else {
+    Serial.println("OK");
+  }
+  Serial.print("My address: ");
+  Serial.println(Ethernet.localIP());
+
   /*EthernetBonjour.begin("x10");
   EthernetBonjour.addServiceRecord("Arduino Bonjour Webserver Example._http",
                                    80,
                                    MDNSServiceTCP);*/
   X10.init( RTS_PIN, DTR_PIN );
+  
+  Serial.println("Setup complete");
 }
 
 void loop()
@@ -42,6 +46,7 @@ void loop()
   // listen for incoming clients
   EthernetClient client = server.available();
   if (client) {
+    Serial.println("Client connected");
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
     String buffer = "";
@@ -111,20 +116,6 @@ void loop()
             X10.sendCmd(house, device, cmnd);
             break;
           } else {
-            // Send data
-            /*for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
-              client.print("analog input ");
-              client.print(analogChannel);
-              client.print(" is ");
-              client.print(analogRead(analogChannel));
-              client.println("<br />");
-            }*/
-            /*client.println(buffer);
-            client.println("{");
-            client.print("  \"ip\": \"");
-            client.print(Ethernet.localIP());
-            client.println("\"");
-            client.println("}");*/
             client.println("{}");
             break;
           }
